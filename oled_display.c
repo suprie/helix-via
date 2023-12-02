@@ -23,7 +23,8 @@ enum layer_names {
   _QWERTY = 0,
   _LOWER,
   _RAISE,
-  _ADJUST
+  _ADJUST,
+  _ARROW
 };
 
 #ifdef OLED_ENABLE
@@ -59,6 +60,9 @@ void render_status(void) {
           break;
       case _ADJUST:
           oled_write_P(PSTR("Adjust\n"), false);
+          break;
+      case _ARROW:
+          oled_write_P(PSTR("Arrow\n"), false);
           break;
       default:
           // Or use the write_ln shortcut over adding '\n' to the end of your string
