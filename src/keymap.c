@@ -44,12 +44,21 @@ enum custom_keycodes {
   BACKLIT,
   RGBRST,
   XCODEBUILD,
-  QWERTY_MIN
+  QWERTY_MIN,
+  BSP_DEL
 };
 
 // Fillers to make layering more clear
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
+
+// Modifiers keys
+#define RCTL_BR RCTL_T(KC_RBRACKET)
+#define LCTL_BR LCTL_T(KC_LBRACKET)
+
+#define SFT_SPC LSFT_T(KC_SPACE)
+#define SFT_ENT RSFT_T(KC_ENTER)
+#define GUI_NUBS LGUI_T(KC_NUBS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
@@ -68,23 +77,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_LCTL, ARROW, SC_LAPO, KC_LGUI, KC_LBRC,   LOWER, KC_BSPC,   KC_SPC,RAISE,  KC_RBRC, KC_RGUI,  SC_RAPC, KC_NUHS , KC_RCTL \
       ),
  [_QWERTY_MIN] = LAYOUT( \
-      XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, \
-      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-      KC_LSFT , KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT, \
-      KC_LCTL , KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   LOWER,   RAISE ,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL, \
-      XXXXXXX, XXXXXXX, XXXXXXX, LGUI_T(KC_NUBS), ARROW, KC_BSPC, KC_DEL, KC_SPC,SC_SENT,  LOWER, RAISE,  XXXXXXX, XXXXXXX , XXXXXXX \
+      XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,                    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+      KC_TAB,      KC_Q,       KC_W,    KC_E,     KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    BSP_DEL, \
+      KC_LSFT ,    KC_A,       KC_S,    KC_D,     KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT, \
+      LCTL_BR ,    KC_Z,       KC_X,    KC_C,     KC_V,    KC_B,  XXXXXXX, XXXXXXX ,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RCTL_BR, \
+      XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX, GUI_NUBS,   RAISE,  SFT_SPC, SFT_ENT ,  LOWER,   RAISE, XXXXXXX,  XXXXXXX, XXXXXXX , XXXXXXX \
       ),
   [_LOWER] = LAYOUT( \
-      XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, \
-      KC_NUBS,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9   , KC_0,  KC_F12, \
-      KC_F1, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,    KC_F12, \
-      _______, KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, QWERTY_MAIN, KC_ESC, KC_NUBS, KC_QUOT, KC_LBRC, KC_RBRC, KC_BSLS, _______, \
-      XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_DEL,  _______, _______, _______, XXXXXXX, XXXXXXX , XXXXXXX \
+      XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+      KC_TAB ,     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12, \
+      _______,  _______, _______, _______, _______, _______,                    _______, _______, _______, _______, KC_NUHS,  KC_MINS, \
+      _______,  KC_BSPC, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, QWERTY_MAIN,KC_ESC,KC_NUBS, KC_QUOT, KC_LBRC, KC_RBRC, KC_BSLS, KC_EQL, \
+      XXXXXXX,  XXXXXXX, XXXXXXX, _______, _______, _______, _______,    KC_DEL,  _______, _______, _______, XXXXXXX,   XXXXXXX, XXXXXXX \
       ),
   [_RAISE] = LAYOUT( \
       XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, \
       KC_F1, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,    KC_F12, \
-      _______, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______,                   KC_HOME, KC_PGUP, KC_UP,   _______, KC_PAUS, _______, \
+      _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU,                   KC_HOME, KC_PGUP, KC_UP,   _______, KC_PAUS, _______, \
       KC_CAPS, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, \
       XXXXXXX,  XXXXXXX,    XXXXXXX, _______, _______, _______, _______, KC_END,  KC_PGDN, KC_DEL,  KC_INS,  XXXXXXX,  XXXXXXX,    XXXXXXX \
       ),
@@ -97,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       ),
   [_ARROW] =  LAYOUT( \
       _______, _______, _______, _______, _______, _______,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-      _______, _______, _______, _______, _______, KC_PWR,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+      _______, _______, _______, _______, _______, _______,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR, \
       _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU,                                       XXXXXXX, XXXXXXX,  KC_UP , XXXXXXX, XXXXXXX, XXXXXXX, \
       _______, _______, _______, _______, _______, _______, QK_AUTO_SHIFT_UP, QK_AUTO_SHIFT_DOWN, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XCODEBUILD, \
       _______, _______, _______, _______, _______, _______, _______         , QK_AUTO_SHIFT_TOGGLE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
@@ -118,56 +127,35 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_270;
 }
 
-void render_status(void) {
-
-  // Render to mode icon
-  oled_write_ln_P("LAYER", false);
-
-  // Host Keyboard Layer Status    
-  switch (get_highest_layer(layer_state | default_layer_state)) {
-      case _QWERTY_MAIN: oled_write_P(PSTR("Main"), false); break;
-      case _QWERTY:      oled_write_P(PSTR("DFLT"), false); break;       
-      case _QWERTY_MIN:  oled_write_P(PSTR("Min"), false); break;
-      case _RAISE:       oled_write_P(PSTR("Rai"), false); break;
-      case _LOWER:       oled_write_P(PSTR("Low"), false); break;
-      case _ADJUST:      oled_write_P(PSTR("Adj"), false); break;
-      case _ARROW:       oled_write_P(PSTR("Arr"), false); break;
-      default: oled_write_P(("UNDEF"), false); break;
-  }
-   
-  // Host Keyboard LED Status
-  led_t led_state = host_keyboard_led_state();
-  oled_write_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
-  oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
-  oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
-}
-
-// static void render_logo(void) {
-//     static const unsigned char PROGMEM raw_logo[] = {
-//         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,128,128,128,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,128,128,128,128,128,128,128,128,128,128,128,  0,  0,  0,128,128,128,128,128,128,128,128,128,128,128,  0,  0,  0,128,128,128,128,128,128,128,128,128,128,128,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-//         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,255,255,255,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,255,255,255,  3,  3,  3,  3,  3,  3,  3,  3,  0,  0,  0,255,255,255,  3,  3,  3,  3,  3,  3,  3,  3,  0,  0,  0,  3,  3,  3,  3,255,255,255,  3,  3,  3,  3,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-//         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,255,255,255,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,255,255,255,  3,  3,  3,  3,  3,  3,  0,  0,  0,  0,  0,255,255,255,  3,  3,  3,  3,  3,  3,  0,  0,  0,  0,  0,  0,  0,  0,  0,255,255,255,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-//         0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  0,  0,  0,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  0,  0,  0,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  7,  0,  0,  0,  0,  0,  0,  0,  7,  7,  7,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-//     };
-//     oled_write_raw_P(raw_logo, sizeof(raw_logo));
-// }
-
-
-static void render_anuan(void) {
-    oled_write_P(PSTR("Act\n"), false);
-
-    switch (get_highest_layer(default_layer_state)) {
-        case _QWERTY_MAIN: oled_write_P(PSTR("Main "), false); break;
-        case _QWERTY:      oled_write_P(PSTR("DFLT "), false); break;
-        case _QWERTY_MIN:  oled_write_P(PSTR("Min "), false); break;
-        case _RAISE:       oled_write_P(PSTR("Rai  "), false); break;
-        case _LOWER:       oled_write_P(PSTR("Low  "), false); break;
-        case _ADJUST:      oled_write_P(PSTR("Adj  "), false); break;
-        case _ARROW:       oled_write_P(PSTR("Arr  "), false); break;
-        default: oled_write_P(("UNDEF"), false); break;
-          // Or use the write_ln shortcut over adding '\n' to the end of your string
+static void render_layer_state(int layer) {
+    switch (get_highest_layer(layer)) {
+        case _QWERTY_MAIN: oled_write("Main ", false); break;
+        case _QWERTY:      oled_write("DFLT ", true); break;
+        case _QWERTY_MIN:  oled_write("Min  " ,true); break;
+        case _RAISE:       oled_write("Rai  ", true); break;
+        case _LOWER:       oled_write("Low  ", true); break;
+        case _ADJUST:      oled_write("Adj  ", true); break;
+        case _ARROW:       oled_write("Arr  ", true); break;
+        default: oled_write(("UNDEF"), true); break;
     }
 }
+
+void render_status(void) {
+  // Host Keyboard Layer Status    
+  render_layer_state(layer_state | default_layer_state);
+}
+
+static void render_anuan(void) {
+    render_layer_state(default_layer_state);
+}
+
+void oled_render_kapi_logo(void) {
+    static const char PROGMEM font_kapi_logo[2][16] = {
+        {0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0},
+        {0x85, 0x86, 0x87, 0x88, 0x89, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0}
+    };
+    oled_write_P(font_kapi_logo[get_current_wpm() % 2], false);
+};
 
 static void render_rgbled_status(bool full) {
 #ifdef RGBLIGHT_ENABLE
@@ -211,19 +199,36 @@ void set_keylog(uint16_t keycode, keyrecord_t *record) {
 
 void oled_render_keylog(void) {
     oled_write_P(PSTR("\n"), false);
-    oled_write(keylog_str, false);
+    oled_write_ln(keylog_str, false);
+}
+
+void oled_render_separator(void) {
+    oled_write_ln("_____", false);
+}
+
+void oled_render_wpm(void) {
+    oled_write("WPM: ", false);
+    oled_write(get_u8_str(get_current_wpm(), ' '), false);
 }
 
 bool oled_task_user(void) {
   if(is_keyboard_master()){
     render_status();
+    oled_render_separator();
     render_anuan();
+    oled_render_separator();
     oled_render_keylog();
+    oled_render_separator();
+    oled_render_kapi_logo();
+    oled_render_separator();
   }else{
-    // render_logo();
+    oled_render_wpm();
+    oled_render_separator();
+    oled_render_kapi_logo(); 
+    oled_render_separator();  
     render_rgbled_status(true);
   }
-    return false;
+  return false;   
 }
 
 // define variables for reactive RGB
@@ -354,6 +359,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case XCODEBUILD:
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LSFT)SS_DOWN(X_LCTL)SS_DOWN(X_LGUI)SS_DOWN(X_G)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LGUI)SS_UP(X_G));
+        }
+        return false;
+        break;
+    case BSP_DEL:
+        if (record->event.pressed) {
+             saved_mods = get_mods() & MOD_MASK_SHIFT;
+
+            if (saved_mods == MOD_MASK_SHIFT) {  // Both shifts pressed
+                register_code(KC_DEL);
+            } else if (saved_mods) {   // One shift pressed
+                del_mods(saved_mods);  // Remove any Shifts present
+                register_code(KC_DEL);
+                add_mods(saved_mods);  // Add shifts again
+            } else {
+                register_code(KC_BSPC);
+            }
+        } else {
+            unregister_code(KC_DEL);
+            unregister_code(KC_BSPC);
         }
         return false;
         break;

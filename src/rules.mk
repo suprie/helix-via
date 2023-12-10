@@ -16,8 +16,8 @@ UNICODE_ENABLE = no         # Unicode
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 RGBLIGHT_ENABLE = no        # Enable WS2812 RGB underlight.
 SWAP_HANDS_ENABLE = no        # Enable one-hand typing
-
-AUTO_SHIFT_ENABLE = yes
+WPM_ENABLE        = yes
+AUTO_SHIFT_ENABLE = no
 
 define HELIX_CUSTOMISE_MSG
   $(info Helix customize)

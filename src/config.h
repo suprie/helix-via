@@ -39,3 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #endif /* CONFIG_USER_H */
+#undef OLED_FONT_H
+
+#define OLED_FONT_H "keyboards/helix/rev3_5rows/keymaps/suprie/glcdfont.c"
