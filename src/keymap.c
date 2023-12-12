@@ -40,12 +40,12 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
-  ARROW,
   BACKLIT,
   RGBRST,
   XCODEBUILD,
   QWERTY_MIN,
-  BSP_DEL
+  BSP_DEL,
+  TAB_ESC
 };
 
 // Fillers to make layering more clear
@@ -53,64 +53,57 @@ enum custom_keycodes {
 #define XXXXXXX KC_NO
 
 // Modifiers keys
-#define RCTL_BR RCTL_T(KC_RBRACKET)
-#define LCTL_BR LCTL_T(KC_LBRACKET)
+#define RCTL_BR  RCTL_T(KC_RCBR)
+#define LCTL_BR  LCTL_T(KC_LCBR)
 
-#define SFT_SPC LSFT_T(KC_SPACE)
-#define SFT_ENT RSFT_T(KC_ENTER)
+#define SFT_SPC  LSFT_T(KC_SPACE)
+#define SFT_ENT  RSFT_T(KC_ENTER)
 #define GUI_NUBS LGUI_T(KC_NUBS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [_QWERTY_MAIN] = LAYOUT( \
       KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
-      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
+      TAB_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
       KC_LSFT , KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT, \
       KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  LOWER  ,   RAISE ,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT, \
-      ARROW, KC_NUBS, SC_LAPO, KC_LGUI, KC_LBRC,   LOWER, KC_BSPC, KC_SPC,RAISE,  KC_RBRC, KC_RGUI,  SC_RAPC, KC_NUHS , KC_RCTL \
+      XXXXXXX, KC_NUBS, SC_LAPO, KC_LGUI, KC_LBRC,   LOWER, KC_BSPC, KC_SPC,RAISE,  KC_RBRC, KC_RGUI,  SC_RAPC, KC_NUHS , KC_RCTL \
       ),
   [_QWERTY] = LAYOUT( \
       KC_NUBS,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
-      KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
+      TAB_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
       KC_QUOT , KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_EQL, \
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  LOWER  ,   RAISE ,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT, \
-      KC_LCTL, ARROW, SC_LAPO, KC_LGUI, KC_LBRC,   LOWER, KC_BSPC,   KC_SPC,RAISE,  KC_RBRC, KC_RGUI,  SC_RAPC, KC_NUHS , KC_RCTL \
+      KC_LCTL, XXXXXXX, SC_LAPO, KC_LGUI, KC_LBRC,   LOWER, KC_BSPC,   KC_SPC,RAISE,  KC_RBRC, KC_RGUI,  SC_RAPC, KC_NUHS , KC_RCTL \
       ),
  [_QWERTY_MIN] = LAYOUT( \
-      XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,                    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-      KC_TAB,      KC_Q,       KC_W,    KC_E,     KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    BSP_DEL, \
-      KC_LSFT ,    KC_A,       KC_S,    KC_D,     KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT, \
-      LCTL_BR ,    KC_Z,       KC_X,    KC_C,     KC_V,    KC_B,  XXXXXXX, XXXXXXX ,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RCTL_BR, \
-      XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX, GUI_NUBS,   RAISE,  SFT_SPC, SFT_ENT ,  LOWER,   RAISE, XXXXXXX,  XXXXXXX, XXXXXXX , XXXXXXX \
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+      TAB_ESC,    KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, BSP_DEL, \
+      RAISE ,     KC_A,    KC_S,    KC_D,     KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,   LOWER, \
+      LCTL_BR ,   KC_Z,    KC_X,    KC_C,     KC_V,    KC_B, XXXXXXX, XXXXXXX ,   KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, RCTL_BR, \
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GUI_NUBS, BSP_DEL, SFT_SPC, SFT_SPC ,SFT_ENT, KC_QUOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
       ),
   [_LOWER] = LAYOUT( \
       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-      KC_TAB ,     KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12, \
-      _______,  _______, _______, _______, _______, _______,                    _______, _______, _______, _______, KC_NUHS,  KC_MINS, \
-      _______,  KC_BSPC, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, QWERTY_MAIN,KC_ESC,KC_NUBS, KC_QUOT, KC_LBRC, KC_RBRC, KC_BSLS, KC_EQL, \
-      XXXXXXX,  XXXXXXX, XXXXXXX, _______, _______, _______, _______,    KC_DEL,  _______, _______, _______, XXXXXXX,   XXXXXXX, XXXXXXX \
+      TAB_ESC ,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12, \
+      _______,  KC_MINS, KC_QUOT, KC_NUHS, KC_NUBS, _______,                    _______, KC_NUBS, KC_NUHS, KC_QUOT, KC_MINS, _______, \
+      _______,   KC_EQL, KC_LBRC, KC_RBRC, _______, _______, XXXXXXX, XXXXXXX,  _______, _______, KC_LBRC, KC_RBRC,  KC_EQL, _______, \
+      XXXXXXX,  XXXXXXX, XXXXXXX, _______, _______, _______, BSP_DEL, BSP_DEL,  _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX \
       ),
   [_RAISE] = LAYOUT( \
-      XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, \
-      KC_F1, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,    KC_F12, \
-      _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU,                   KC_HOME, KC_PGUP, KC_UP,   _______, KC_PAUS, _______, \
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+      KC_F1  ,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12, \
+      _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU,                   KC_HOME, KC_PGUP,   KC_UP, _______, KC_PAUS, _______, \
       KC_CAPS, KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_BSPC, _______, \
-      XXXXXXX,  XXXXXXX,    XXXXXXX, _______, _______, _______, _______, KC_END,  KC_PGDN, KC_DEL,  KC_INS,  XXXXXXX,  XXXXXXX,    XXXXXXX \
+      XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_END,  KC_PGDN, KC_DEL,   KC_INS, XXXXXXX, XXXXXXX, XXXXXXX \
       ),
   [_ADJUST] =  LAYOUT( \
       XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, \
-      KC_NUBS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL, \
+      KC_NUBS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL, \
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX,                 XXXXXXX, QWERTY,  QWERTY_MAIN, _______,  _______, _______, \
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, QWERTY_MAIN, QWERTY_MIN, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD \
       ),
-  [_ARROW] =  LAYOUT( \
-      _______, _______, _______, _______, _______, _______,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-      _______, _______, _______, _______, _______, _______,                                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PWR, \
-      _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU,                                       XXXXXXX, XXXXXXX,  KC_UP , XXXXXXX, XXXXXXX, XXXXXXX, \
-      _______, _______, _______, _______, _______, _______, QK_AUTO_SHIFT_UP, QK_AUTO_SHIFT_DOWN, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XCODEBUILD, \
-      _______, _______, _______, _______, _______, _______, _______         , QK_AUTO_SHIFT_TOGGLE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
-      )
 };
 
 #ifdef AUDIO_ENABLE
@@ -135,7 +128,6 @@ static void render_layer_state(int layer) {
         case _RAISE:       oled_write("Rai  ", true); break;
         case _LOWER:       oled_write("Low  ", true); break;
         case _ADJUST:      oled_write("Adj  ", true); break;
-        case _ARROW:       oled_write("Arr  ", true); break;
         default: oled_write(("UNDEF"), true); break;
     }
 }
@@ -156,24 +148,6 @@ void oled_render_kapi_logo(void) {
     };
     oled_write_P(font_kapi_logo[get_current_wpm() % 2], false);
 };
-
-static void render_rgbled_status(bool full) {
-#ifdef RGBLIGHT_ENABLE
-  char buf[30];
-  if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
-      if (full) {
-          snprintf(buf, sizeof(buf), " LED %2d: %d,%d,%d ",
-                   rgblight_get_mode(),
-                   rgblight_get_hue()/RGBLIGHT_HUE_STEP,
-                   rgblight_get_sat()/RGBLIGHT_SAT_STEP,
-                   rgblight_get_val()/RGBLIGHT_VAL_STEP);
-      } else {
-          snprintf(buf, sizeof(buf), "[%2d] ", rgblight_get_mode());
-      }
-      oled_write(buf, false);
-  }
-#endif
-}
 
 char keylog_str[24] = {};
 
@@ -221,12 +195,6 @@ bool oled_task_user(void) {
     oled_render_separator();
     oled_render_kapi_logo();
     oled_render_separator();
-  }else{
-    oled_render_wpm();
-    oled_render_separator();
-    oled_render_kapi_logo(); 
-    oled_render_separator();  
-    render_rgbled_status(true);
   }
   return false;   
 }
@@ -253,6 +221,8 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static uint8_t saved_mods   = 0;
+
   if (record->event.pressed) {
     set_keylog(keycode, record);
   }
@@ -328,14 +298,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
-    case ARROW:
-        if (record->event.pressed) {
-          layer_on(_ARROW);
-        } else {
-          layer_off(_ARROW);
-        }
-        return false;
-        break;
       //led operations - RGB mode change now updates the RGB_current_mode to allow the right RGB mode to be set after reactive keys are released
     case RGB_MOD:
       #ifdef RGBLIGHT_ENABLE
@@ -378,6 +340,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
             unregister_code(KC_DEL);
             unregister_code(KC_BSPC);
+        }
+        return false;
+        break;
+    case TAB_ESC:
+        if (record->event.pressed) {
+             saved_mods = get_mods() & MOD_MASK_SHIFT;
+
+            if (saved_mods) {   // One shift pressed
+                del_mods(saved_mods);  // Remove any Shifts present
+                register_code(KC_ESC);
+                add_mods(saved_mods);  // Add shifts again
+            } else {
+                register_code(KC_TAB);
+            }
+        } else {
+            unregister_code(KC_ESC);
+            unregister_code(KC_TAB);
         }
         return false;
         break;
