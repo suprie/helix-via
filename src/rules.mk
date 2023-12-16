@@ -19,6 +19,8 @@ SWAP_HANDS_ENABLE 	= no        # Enable one-hand typing
 WPM_ENABLE        	= yes
 AUTO_SHIFT_ENABLE 	= no
 TAP_DANCE_ENABLE	= no
+TRI_LAYER_ENABLE 	= yes
+
 
 define HELIX_CUSTOMISE_MSG
   $(info Helix customize)

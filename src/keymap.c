@@ -25,25 +25,15 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 enum layer_number {
-    _QWERTY_MAIN  = 0,
-    _QWERTY,
-    _QWERTY_MIN,
+    _QWERTY = 0,
+    _COLEMAK,
     _LOWER,
     _RAISE,
-    _ADJUST,
-    _ARROW
+    _ADJUST
 };
 
 enum custom_keycodes {
-  QWERTY_MAIN = SAFE_RANGE,
-  QWERTY,
-  LOWER,
-  RAISE,
-  ADJUST,
-  BACKLIT,
-  RGBRST,
-  XCODEBUILD,
-  QWERTY_MIN,
+  XCODEBUILD = SAFE_RANGE,
   BSP_DEL,
   TAB_ESC
 };
@@ -56,39 +46,48 @@ enum custom_keycodes {
 #define RCTL_BR  RCTL_T(KC_RCBR)
 #define LCTL_BR  LCTL_T(KC_LCBR)
 
+#define LCTL_Z  LCTL_T(KC_Z)
+
+#define LSFT_BR  SFT_T(KC_LCBR)
+#define RSFT_BR  SFT_T(KC_RCBR)
+
 #define SFT_SPC  LSFT_T(KC_SPACE)
-#define SFT_ENT  RSFT_T(KC_ENTER)
-#define GUI_NUBS LGUI_T(KC_NUBS)
+#define HYP_ENT  HYPR(KC_ENTER)
+#define GUI_NUBS LGUI_T(KC_NUHS)
+
+#define BKSP_LOW LT(_LOWER, KC_BSPC)
+#define ENTRAI LT(_RAISE, KC_ENT)
+
+#define LOWER TL_LOWR
+#define RAISE TL_UPPR
+
+#define COLEMAK DF(_COLEMAK)
+#define QWERTY DF(_QWERTY)
+
+#define  ADJ MO(_ADJUST)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  
-  [_QWERTY_MAIN] = LAYOUT( \
-      KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
-      TAB_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-      KC_LSFT , KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_QUOT, \
-      KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  LOWER  ,   RAISE ,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT, \
-      XXXXXXX, KC_NUBS, SC_LAPO, KC_LGUI, KC_LBRC,   LOWER, KC_BSPC, KC_SPC,RAISE,  KC_RBRC, KC_RGUI,  SC_RAPC, KC_NUHS , KC_RCTL \
-      ),
-  [_QWERTY] = LAYOUT( \
-      KC_NUBS,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
-      TAB_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-      KC_QUOT , KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,  KC_EQL, \
-      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  LOWER  ,   RAISE ,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SC_SENT, \
-      KC_LCTL, XXXXXXX, SC_LAPO, KC_LGUI, KC_LBRC,   LOWER, KC_BSPC,   KC_SPC,RAISE,  KC_RBRC, KC_RGUI,  SC_RAPC, KC_NUHS , KC_RCTL \
-      ),
- [_QWERTY_MIN] = LAYOUT( \
+
+ [_QWERTY] = LAYOUT( \
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-      TAB_ESC,    KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, BSP_DEL, \
-      RAISE ,     KC_A,    KC_S,    KC_D,     KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,   LOWER, \
-      LCTL_BR ,   KC_Z,    KC_X,    KC_C,     KC_V,    KC_B, XXXXXXX, XXXXXXX ,   KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, RCTL_BR, \
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GUI_NUBS, BSP_DEL, SFT_SPC, SFT_SPC ,SFT_ENT, KC_QUOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
+      TAB_ESC,    KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_QUOT, \
+      RAISE ,     KC_A,    KC_S,    KC_D,     KC_F,    KC_G,                      KC_H,   KC_J,   KC_K,    KC_L, KC_SCLN,     LOWER, \
+      LSFT_BR ,   KC_Z,    KC_X,    KC_C,     KC_V,    KC_B, XXXXXXX, XXXXXXX ,   KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, RSFT_BR, \
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GUI_NUBS, BKSP_LOW, SFT_SPC, SFT_SPC ,ENTRAI, KC_TILD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
+      ),
+[_COLEMAK] = LAYOUT( \
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+      TAB_ESC,    KC_Q,    KC_W,    KC_F,     KC_P,    KC_B,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, KC_QUOT, \
+      RAISE ,   KC_A,    KC_R,    KC_S,     KC_T,      KC_G,                      KC_M,    KC_N,    KC_E,    KC_I,    KC_O, LOWER, \
+      LSFT_BR,   KC_X,    KC_C,    KC_D,     KC_V,    KC_Z, XXXXXXX, XXXXXXX ,   KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, RSFT_BR, \
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GUI_NUBS, BKSP_LOW, SFT_SPC, SFT_SPC ,ENTRAI,  KC_TILD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX \
       ),
   [_LOWER] = LAYOUT( \
       XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
       TAB_ESC ,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_F12, \
       _______,  KC_MINS, KC_QUOT, KC_NUHS, KC_NUBS, _______,                    _______, KC_NUBS, KC_NUHS, KC_QUOT, KC_MINS, _______, \
-      _______,   KC_EQL, KC_LBRC, KC_RBRC, _______, _______, XXXXXXX, XXXXXXX,  _______, _______, KC_LBRC, KC_RBRC,  KC_EQL, _______, \
-      XXXXXXX,  XXXXXXX, XXXXXXX, _______, _______, _______, BSP_DEL, BSP_DEL,  _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX \
+      _______,   KC_EQL, KC_LBRC, KC_RBRC, KC_TILD, _______, XXXXXXX, XXXXXXX,  KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC,  KC_EQL, _______, \
+      XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, KC_UNDS, BSP_DEL, SFT_SPC, SFT_SPC,  HYP_ENT, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX \
       ),
   [_RAISE] = LAYOUT( \
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
@@ -98,11 +97,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, KC_END,  KC_PGDN, KC_DEL,   KC_INS, XXXXXXX, XXXXXXX, XXXXXXX \
       ),
   [_ADJUST] =  LAYOUT( \
-      XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, \
-      KC_NUBS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL, \
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,  XXXXXXX,                 XXXXXXX, QWERTY,  QWERTY_MAIN, _______,  _______, _______, \
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, QWERTY_MAIN, QWERTY_MIN, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD \
+      XXXXXXX,  XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+      KC_NUBS, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_DEL, \
+      _______, QWERTY, _______, _______, _______, _______,                    COLEMAK, _______, _______, _______, _______, _______, \
+      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, _______, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD \
       ),
 };
 
@@ -122,12 +121,11 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 static void render_layer_state(int layer) {
     switch (get_highest_layer(layer)) {
-        case _QWERTY_MAIN: oled_write("Main ", false); break;
         case _QWERTY:      oled_write("DFLT ", true); break;
-        case _QWERTY_MIN:  oled_write("Min  " ,true); break;
         case _RAISE:       oled_write("Rai  ", true); break;
         case _LOWER:       oled_write("Low  ", true); break;
         case _ADJUST:      oled_write("Adj  ", true); break;
+        case _COLEMAK:    oled_write("COL  ", true); break;
         default: oled_write(("UNDEF"), true); break;
     }
 }
@@ -141,13 +139,13 @@ static void render_anuan(void) {
     render_layer_state(default_layer_state);
 }
 
-void oled_render_kapi_logo(void) {
-    static const char PROGMEM font_kapi_logo[2][16] = {
-        {0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0},
-        {0x85, 0x86, 0x87, 0x88, 0x89, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0}
-    };
-    oled_write_P(font_kapi_logo[get_current_wpm() % 2], false);
-};
+// void oled_render_kapi_logo(void) {
+//     static const char PROGMEM font_kapi_logo[2][16] = {
+//         {0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0},
+//         {0x85, 0x86, 0x87, 0x88, 0x89, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0}
+//     };
+//     oled_write_P(font_kapi_logo[get_current_wpm() % 2], false);
+// };
 
 char keylog_str[24] = {};
 
@@ -192,9 +190,6 @@ bool oled_task_user(void) {
     render_anuan();
     oled_render_separator();
     oled_render_keylog();
-    oled_render_separator();
-    oled_render_kapi_logo();
-    oled_render_separator();
   }
   return false;   
 }
@@ -202,23 +197,6 @@ bool oled_task_user(void) {
 // define variables for reactive RGB
 bool TOG_STATUS = false;
 int RGB_current_mode;
-
-void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
-
-// Setting ADJUST layer RGB back to default
-void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
-  if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
-    #ifdef RGBLIGHT_ENABLE
-      //rgblight_mode(RGB_current_mode);
-    #endif
-    layer_on(layer3);
-  } else {
-    layer_off(layer3);
-  }
-}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint8_t saved_mods   = 0;
@@ -228,96 +206,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   switch (keycode) {
-    case QWERTY:
-      if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_QWERTY);
-      }
-      return false;
-      break;
-    case QWERTY_MAIN:
-      if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_QWERTY_MAIN);
-      }
-      return false;
-    case QWERTY_MIN:
-      if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_QWERTY_MIN);
-      }
-      return false;
-    case LOWER:
-      if (record->event.pressed) {
-          //not sure how to have keyboard check mode and set it to a variable, so my work around
-          //uses another variable that would be set to true after the first time a reactive key is pressed.
-        if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
-        } else {
-          TOG_STATUS = !TOG_STATUS;
-          #ifdef RGBLIGHT_ENABLE
-            //rgblight_mode(RGBLIGHT_MODE_SNAKE + 1);
-          #endif
-        }
-        layer_on(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      } else {
-        #ifdef RGBLIGHT_ENABLE
-          //rgblight_mode(RGB_current_mode);   // revert RGB to initial mode prior to RGB mode change
-        #endif
-        TOG_STATUS = false;
-        layer_off(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case RAISE:
-      if (record->event.pressed) {
-        //not sure how to have keyboard check mode and set it to a variable, so my work around
-        //uses another variable that would be set to true after the first time a reactive key is pressed.
-        if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
-        } else {
-          TOG_STATUS = !TOG_STATUS;
-          #ifdef RGBLIGHT_ENABLE
-            //rgblight_mode(RGBLIGHT_MODE_SNAKE);
-          #endif
-        }
-        layer_on(_RAISE);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      } else {
-        #ifdef RGBLIGHT_ENABLE
-          //rgblight_mode(RGB_current_mode);  // revert RGB to initial mode prior to RGB mode change
-        #endif
-        layer_off(_RAISE);
-        TOG_STATUS = false;
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
-      }
-      return false;
-      break;
-    case ADJUST:
-        if (record->event.pressed) {
-          layer_on(_ADJUST);
-        } else {
-          layer_off(_ADJUST);
-        }
-        return false;
-        break;
-      //led operations - RGB mode change now updates the RGB_current_mode to allow the right RGB mode to be set after reactive keys are released
-    case RGB_MOD:
-      #ifdef RGBLIGHT_ENABLE
-        if (record->event.pressed) {
-          rgblight_mode(RGB_current_mode);
-          rgblight_step();
-          RGB_current_mode = rgblight_config.mode;
-        }
-      #endif
-      return false;
-      break;
-    case RGBRST:
-      #ifdef RGBLIGHT_ENABLE
-        if (record->event.pressed) {
-          eeconfig_update_rgblight_default();
-          rgblight_enable();
-          RGB_current_mode = rgblight_config.mode;
-        }
-      #endif
-      break;
     case XCODEBUILD:
         if (record->event.pressed) {
             SEND_STRING(SS_DOWN(X_LSFT)SS_DOWN(X_LCTL)SS_DOWN(X_LGUI)SS_DOWN(X_G)SS_UP(X_LSFT)SS_UP(X_LCTL)SS_UP(X_LGUI)SS_UP(X_G));
